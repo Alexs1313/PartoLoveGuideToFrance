@@ -1,5 +1,5 @@
 import LottieView from 'lottie-react-native';
-import { Dimensions, Image, StyleSheet, View } from 'react-native';
+import { Dimensions, Image, Platform, StyleSheet, View } from 'react-native';
 import MainBackground from '../components/MainBackground';
 const { height } = Dimensions.get('window');
 
@@ -13,10 +13,17 @@ const WelcomeLoader = () => {
           style={{ width: 550, height: 470 }}
         />
 
-        <Image
-          source={require('../assets/images/appLogo.png')}
-          style={styles.logo}
-        />
+        {Platform.OS === 'ios' ? (
+          <Image
+            source={require('../assets/images/appLogo.png')}
+            style={styles.logo}
+          />
+        ) : (
+          <Image
+            source={require('../assets/images/partoicon.png')}
+            style={styles.logo}
+          />
+        )}
 
         <View style={{ alignItems: 'center' }}>
           <Image
@@ -36,7 +43,13 @@ const WelcomeLoader = () => {
 
 const styles = StyleSheet.create({
   container: { flex: 1, alignItems: 'center', marginTop: height * 0.05 },
-  logo: { position: 'absolute', top: 90 },
+  logo: {
+    position: 'absolute',
+    top: 90,
+    width: 204,
+    height: 204,
+    borderRadius: 20,
+  },
   spinner: { width: 380, height: 230, position: 'absolute', top: 190 },
 });
 

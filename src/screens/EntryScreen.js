@@ -61,7 +61,7 @@ const EntryScreen = () => {
             position: 'absolute',
           }}
           blurType="dark"
-          blurAmount={10}
+          blurAmount={1}
         />
         <Text style={styles.label}>{entryInfo[currentStep].label}</Text>
         <Text style={styles.description}>
@@ -103,6 +103,7 @@ const styles = StyleSheet.create({
     borderRadius: 22,
     paddingHorizontal: 13,
     alignItems: 'center',
+    overflow: 'hidden',
   },
   label: {
     fontWeight: '600',

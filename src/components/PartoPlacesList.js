@@ -1,4 +1,11 @@
-import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import {
+  Image,
+  Platform,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import MainBackground from '../components/MainBackground';
 import { useCallback } from 'react';
 import LinearGradient from 'react-native-linear-gradient';
@@ -37,7 +44,11 @@ const PartoPlacesList = ({ place, screen }) => {
   return (
     <MainBackground>
       <View style={styles.container}>
-        <Header title={'Diary of memories'} />
+        <Header
+          title={
+            screen === 'SavedScreen' ? 'Saved places' : 'Recommended places'
+          }
+        />
         {screen === 'RecommendsScreen' && (
           <View style={styles.shareContainer}>
             <View style={styles.blurWrap}>
@@ -58,10 +69,17 @@ const PartoPlacesList = ({ place, screen }) => {
         <>
           {placesList.length === 0 && (
             <>
-              <Image
-                source={require('../assets/images/appLogo.png')}
-                style={styles.logo}
-              />
+              {Platform.OS === 'ios' ? (
+                <Image
+                  source={require('../assets/images/appLogo.png')}
+                  style={styles.logo}
+                />
+              ) : (
+                <Image
+                  source={require('../assets/images/partoicon.png')}
+                  style={styles.logo}
+                />
+              )}
               <View style={styles.emptyScreenContainer}>
                 <View style={styles.emptyScreenBlurWrap}>
                   <BlurView
@@ -123,7 +141,7 @@ const PartoPlacesList = ({ place, screen }) => {
                     onPress={() =>
                       navigation.navigate('PartoPlacesCardDetails', {
                         place,
-                        screen: 'List',
+                        screen: screen === 'RecommendsScreen' ? 'Rec' : 'Saved',
                       })
                     }
                   >
@@ -221,7 +239,13 @@ const styles = StyleSheet.create({
     marginTop: 16,
     marginBottom: 37,
   },
-  logo: { width: 153, height: 153, marginTop: 23, marginBottom: 38 },
+  logo: {
+    width: 153,
+    height: 153,
+    marginTop: 23,
+    marginBottom: 38,
+    borderRadius: 20,
+  },
   navButton: {
     width: '100%',
     height: 65,

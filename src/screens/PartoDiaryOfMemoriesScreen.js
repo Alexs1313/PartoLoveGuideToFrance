@@ -1,5 +1,6 @@
 import {
   Image,
+  Platform,
   StyleSheet,
   Text,
   TextInput,
@@ -40,10 +41,17 @@ const PartoDiaryOfMemoriesScreen = () => {
 
         {savedMemories.length === 0 ? (
           <>
-            <Image
-              source={require('../assets/images/appLogo.png')}
-              style={styles.logo}
-            />
+            {Platform.OS === 'ios' ? (
+              <Image
+                source={require('../assets/images/appLogo.png')}
+                style={styles.logo}
+              />
+            ) : (
+              <Image
+                source={require('../assets/images/partoicon.png')}
+                style={styles.logo}
+              />
+            )}
             <View style={styles.shareContainer}>
               <View style={styles.blurWrap}>
                 <BlurView
@@ -214,7 +222,13 @@ const styles = StyleSheet.create({
     marginTop: 16,
     marginBottom: 37,
   },
-  logo: { width: 153, height: 153, marginTop: 23, marginBottom: 38 },
+  logo: {
+    width: 153,
+    height: 153,
+    marginTop: 23,
+    marginBottom: 38,
+    borderRadius: 20,
+  },
   navButton: {
     width: '100%',
     height: 65,

@@ -66,7 +66,13 @@ ${place.description}`,
       style={{ flex: 1 }}
     >
       <View style={styles.container}>
-        <Header title={'Recommended places'} />
+        <Header
+          title={[
+            screen === 'Map' && 'Interactive map',
+            screen === 'Rec' && 'Recommended places',
+            screen === 'Saved' && 'Saved places',
+          ]}
+        />
 
         <>
           <View style={styles.cardContainer}>

@@ -1,5 +1,6 @@
 import {
   Image,
+  Platform,
   Share,
   StyleSheet,
   Text,
@@ -36,10 +37,18 @@ unforgettable moments.`,
           autoPlay
           style={{ width: 250, height: 170 }}
         />
-        <Image
-          source={require('../assets/images/appLogo.png')}
-          style={styles.logo}
-        />
+
+        {Platform.OS === 'ios' ? (
+          <Image
+            source={require('../assets/images/appLogo.png')}
+            style={styles.logo}
+          />
+        ) : (
+          <Image
+            source={require('../assets/images/partoicon.png')}
+            style={styles.logo}
+          />
+        )}
         <View style={styles.shareContainer}>
           <View style={styles.blurWrap}>
             <BlurView
@@ -50,10 +59,10 @@ unforgettable moments.`,
             />
 
             <Text style={styles.description}>
-              PartoLove: Guide to France is your personal guide to the world of
-              romance, inspiration, and travel in France. The app will help you
-              find the best places for dates, atmospheric walks, and
-              unforgettable moments.
+              {Platform.OS === 'android' && 'Crown'} PartoLove: Guide to France
+              is your personal guide to the world of romance, inspiration, and
+              travel in France. The app will help you find the best places for
+              dates, atmospheric walks, and unforgettable moments.
             </Text>
 
             <TouchableOpacity
@@ -198,7 +207,13 @@ const styles = StyleSheet.create({
     marginTop: 16,
     marginBottom: 37,
   },
-  logo: { position: 'absolute', top: 90, width: 109, height: 109 },
+  logo: {
+    position: 'absolute',
+    top: 90,
+    width: 109,
+    height: 109,
+    borderRadius: 20,
+  },
   navButton: {
     width: '100%',
     height: 65,
